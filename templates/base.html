@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Total War: WARHAMMER III">
+  <title>全面战争战锤3:种族背景</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+  <style>
+    .daohang {
+      position: relative;
+      z-index: 10;
+      padding: 0.75rem 1.25rem;
+      background: linear-gradient(135deg, #17191c 0%, #29231b 100%) !important;
+      border-bottom: 3px solid #b08d2c;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .daohang .navbar-brand {
+      margin-right: 2rem;
+      color: #f2d27b;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+
+    .daohang .navbar-brand:hover,
+    .daohang .navbar-brand:focus {
+      color: #fff1bd;
+    }
+
+    .daohang .navbar-nav .nav-link {
+      position: relative;
+      padding: 0.7rem 1rem;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .daohang .navbar-nav .nav-link::after {
+      position: absolute;
+      right: 1rem;
+      bottom: 0.25rem;
+      left: 1rem;
+      height: 2px;
+      content: "";
+      background-color: #d3aa3d;
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+
+    .daohang .navbar-nav .nav-link:hover,
+    .daohang .navbar-nav .nav-link:focus,
+    .daohang .navbar-nav .active > .nav-link {
+      color: #fff;
+    }
+
+    .daohang .navbar-nav .nav-link:hover::after,
+    .daohang .navbar-nav .active > .nav-link::after {
+      transform: scaleX(1);
+    }
+
+    .daohang .navbar-toggler {
+      border-color: rgba(242, 210, 123, 0.6);
+    }
+
+    .daohang .navbar-toggler-icon {
+      filter: invert(82%) sepia(25%) saturate(700%) hue-rotate(5deg);
+    }
+
+    .daohang .form-control {
+      min-width: 180px;
+      border: 1px solid rgba(242, 210, 123, 0.45);
+      background-color: rgba(255, 255, 255, 0.94);
+    }
+
+    .daohang .form-control:focus {
+      border-color: #f2d27b;
+      box-shadow: 0 0 0 0.2rem rgba(242, 210, 123, 0.2);
+    }
+
+    .daohang .btn-outline-success {
+      color: #f2d27b;
+      border-color: #b08d2c;
+    }
+
+    .daohang .btn-outline-success:hover,
+    .daohang .btn-outline-success:focus {
+      color: #17191c;
+      background-color: #f2d27b;
+      border-color: #f2d27b;
+    }
+
+    .logo-banner {
+      padding: 1.25rem 1rem;
+      text-align: center;
+      background-color: #111315;
+    }
+
+    .logo-banner img {
+      display: block;
+      width: min(100%, 960px);
+      max-height: 375px;
+      margin: 0 auto;
+      object-fit: cover;
+      border: 2px solid #b08d2c;
+      border-radius: 6px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    .map-banner {
+      padding: 0 1rem 1.25rem;
+      text-align: center;
+      background-color: #111315;
+    }
+
+    .map-banner img {
+      display: block;
+      width: min(100%, 960px);
+      height: auto;
+      margin: 0 auto;
+      border: 2px solid #b08d2c;
+      border-radius: 6px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    @media (max-width: 991.98px) {
+      .daohang .navbar-collapse {
+        padding-top: 0.75rem;
+      }
+
+      .daohang .navbar-nav .nav-link {
+        padding-left: 0.25rem;
+      }
+
+      .daohang .navbar-nav .nav-link::after {
+        right: auto;
+        bottom: 0.2rem;
+        left: 0.25rem;
+        width: 4rem;
+      }
+
+      .daohang form {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark daohang">
+    <a class="navbar-brand" href="https://store.steampowered.com/app/1142710?snr=5000_5100__">Total War WARHAMMER III</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="">主页 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('show_zhongzu') }}">种族</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="搜索内容" aria-label="搜索">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+      </form>
+    </div>
+  </nav>
+
+    <div class="logo-banner">
+      <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Total War WARHAMMER III 标志">
+    </div>
+    <div class="map-banner">
+      <img src="{{ url_for('static', filename='ditu.jpg') }}" alt="战锤世界地图">
+    </div>
+  
+
+  <script src="{{ url_for('static', filename='Jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>

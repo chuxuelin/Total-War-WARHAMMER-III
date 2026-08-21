@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>全面战争战锤3:种族背景</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <style>
+        html,
+        body {
+            min-height: 100%;
+            margin: 0;
+            background-color: #111315;
+        }
+
+        .daohang {
+            position: relative;
+            z-index: 10;
+            padding: 0.75rem 1.25rem;
+            background: linear-gradient(135deg, #17191c 0%, #29231b 100%) !important;
+            border-bottom: 3px solid #b08d2c;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        .daohang .navbar-brand {
+            margin-right: 2rem;
+            color: #f2d27b;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .daohang .navbar-brand:hover,
+        .daohang .navbar-brand:focus {
+            color: #fff1bd;
+        }
+
+        .daohang .navbar-nav .nav-link {
+            position: relative;
+            padding: 0.7rem 1rem;
+            color: rgba(255, 255, 255, 0.78);
+            font-weight: 600;
+        }
+
+        .daohang .navbar-nav .nav-link::after {
+            position: absolute;
+            right: 1rem;
+            bottom: 0.25rem;
+            left: 1rem;
+            height: 2px;
+            content: "";
+            background-color: #d3aa3d;
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+        }
+
+        .daohang .navbar-nav .nav-link:hover,
+        .daohang .navbar-nav .nav-link:focus,
+        .daohang .navbar-nav .active > .nav-link {
+            color: #fff;
+        }
+
+        .daohang .navbar-nav .nav-link:hover::after,
+        .daohang .navbar-nav .active > .nav-link::after {
+            transform: scaleX(1);
+        }
+
+        .daohang .form-control {
+            min-width: 180px;
+            border: 1px solid rgba(242, 210, 123, 0.45);
+        }
+
+        .daohang .btn-outline-success {
+            color: #f2d27b;
+            border-color: #b08d2c;
+        }
+
+        .daohang .btn-outline-success:hover,
+        .daohang .btn-outline-success:focus {
+            color: #17191c;
+            background-color: #f2d27b;
+            border-color: #f2d27b;
+        }
+
+        .container {
+            max-width: 650px;
+            padding-top: 16px;
+            padding-bottom: 24px;
+        }
+
+        .zhongzu {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            min-height: 104px;
+            padding: 0 0 6px;
+            margin: 0 12px 16px;
+            color: #d8d8d8;
+            border-bottom: 1px solid #d4f197;
+        }
+
+        .zhongzu .title {
+            flex: 0 0 80px;
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        .zhongzu .img-box {
+            display: flex;
+            flex-wrap: wrap;
+            flex: 0 1 auto;
+        }
+
+        .zhongzu .img-box__item {
+            position: relative;
+            display: block;
+            flex: 0 0 60px;
+            margin: 0 4px;
+        }
+
+        .zhongzu .img-box__item img {
+            display: block;
+            width: 56px;
+            height: 79px;
+            object-fit: cover;
+        }
+
+        .zhongzu .img-box__item__title {
+            display: none;
+        }
+
+        .zhongzu .img-box__item::after {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            z-index: 20;
+            padding: 6px 10px;
+            color: #fff;
+            font-size: 14px;
+            white-space: nowrap;
+            content: attr(data-image-name);
+            background-color: rgba(17, 19, 21, 0.95);
+            border: 1px solid #b08d2c;
+            border-radius: 4px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 4px);
+            transition: opacity 0.15s ease, transform 0.15s ease;
+        }
+
+        .zhongzu .img-box__item:hover::after {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark daohang">
+        <a class="navbar-brand" href="https://store.steampowered.com/app/1142710?snr=5000_5100__">Total War WARHAMMER III</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">主页</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('show_zhongzu') }}">种族</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="搜索内容" aria-label="搜索">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% for clan_name, heroes in clans %}
+        <section class="zhongzu">
+            <div class="title">{{ clan_name }}</div>
+            <div class="img-box">
+                {% for hero_name in heroes %}
+                <div class="img-box__item" data-image-name="{{ hero_name }}">
+                    <img src="{{ url_for('static', filename='people/' ~ hero_name ~ '.png') }}"
+                        alt="{{ hero_name }}" title="{{ hero_name }}">
+                    <span class="img-box__item__title">{{ hero_name }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endfor %}
+    </main>
+
+    <script src="{{ url_for('static', filename='Jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>
